@@ -5,7 +5,7 @@ import { useMutableCallback } from '@rocket.chat/fuselage-hooks';
 import { useTranslation } from '../../../../client/contexts/TranslationContext';
 import { clickableItem } from '../../../../client/lib/clickableItem';
 
-const CannedMessageItem = clickableItem(({ shortcut, text, scope, _id, onUse, onDetails, className }) => {
+const CannedResponseItem = clickableItem(({ shortcut, text, scope, _id, onUse, onDetails, className }) => {
 	const t = useTranslation();
 
 	const handleDetails = useMutableCallback(() => {
@@ -17,6 +17,7 @@ const CannedMessageItem = clickableItem(({ shortcut, text, scope, _id, onUse, on
 		display='flex'
 		flexDirection='column'
 		p='x8'
+		pi='x24'
 		onClick={handleDetails}
 		className={className}
 		mb='neg-x4'
@@ -43,8 +44,8 @@ const CannedMessageItem = clickableItem(({ shortcut, text, scope, _id, onUse, on
 	</Box>;
 });
 
-const CannedResponsesList = ({ responses }) => <>
-	{responses && responses.map((response) => <CannedMessageItem {...response}/>)}
+const CannedResponsesList = ({ responses, onDetails }) => <>
+	{responses && responses.map((response) => <CannedResponseItem key={response._id} onDetails={onDetails} {...response}/>)}
 </>;
 
 export default React.memo(CannedResponsesList);

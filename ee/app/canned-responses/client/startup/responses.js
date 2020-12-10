@@ -20,12 +20,12 @@ Meteor.startup(() => {
 		if (!Meteor.userId()) {
 			return;
 		}
-		if (!settings.get('Canned_Responses_Enable')) {
-			return;
-		}
-		if (!hasPermission('view-canned-responses')) {
-			return;
-		}
+		// if (!settings.get('Canned_Responses_Enable')) {
+		// 	return;
+		// }
+		// if (!hasPermission('view-canned-responses')) {
+		// 	return;
+		// }
 		try {
 			cannedResponsesStreamer.on('canned-responses', (response, options) => {
 				const { agentsId } = options || {};

@@ -3,11 +3,11 @@ import { Box, Margins, ButtonGroup, Button, Icon, ActionButton } from '@rocket.c
 
 import { useTranslation } from '../../../../client/contexts/TranslationContext';
 import VerticalBar from '../../../../client/components/VerticalBar';
+import { withResponseData } from './withResponseData';
 
-const CannedResponseDetails = ({ shortcut, text, scope, onEdit, onReturn, onClose }) => {
-	console.log();
-
+export const CannedResponseDetails = ({ response: { shortcut, text, scope }, onEdit, onReturn, onClose }) => {
 	const t = useTranslation();
+
 	return <VerticalBar>
 		<VerticalBar.Header>
 			<ActionButton tiny ghost mis='none' icon='arrow-back' onClick={onReturn} />
@@ -17,7 +17,7 @@ const CannedResponseDetails = ({ shortcut, text, scope, onEdit, onReturn, onClos
 
 		<VerticalBar.ScrollableContent>
 			<Margins block='x4'>
-				<span display='flex' flexDirection='column'>
+				<span>
 					<Box fontScale='p2'>{t('Shortcut')}:</Box>
 					<Box fontScale='p1'>!{shortcut}</Box>
 				</span>
@@ -42,4 +42,4 @@ const CannedResponseDetails = ({ shortcut, text, scope, onEdit, onReturn, onClos
 	</VerticalBar>;
 };
 
-export default React.memo(CannedResponseDetails);
+export default React.memo(withResponseData(CannedResponseDetails));
